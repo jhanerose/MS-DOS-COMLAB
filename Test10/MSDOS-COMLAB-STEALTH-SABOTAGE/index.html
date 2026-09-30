@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSDOS-COMLAB: STEALTH SABOTAGE</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+    <!-- MAIN MENU -->
+  <section id="menuScreen" class="screen show">
+    <div class="terminal">
+      <div class="scanlines"></div>
+      <div class="brand"><div class="sys">MS-DOS COMPUTER LAB SECURITY SYSTEM</div><h1>MSDOS-COMLAB:<br>STEALTH SABOTAGE</h1><p>CLASSIFIED // AFTER-HOURS ACCESS</p></div>
+      <div class="menu-list">
+        <button class="dos-btn" onclick="startGame()"><span class="key">01</span> START MISSION</button>
+        <button class="dos-btn" onclick="showHowToPlay()"><span class="key">02</span> HOW TO PLAY</button>
+        <button class="dos-btn" onclick="document.getElementById('about').showModal()"><span class="key">03</span> SYSTEM INFO</button>
+      </div>
+      <div class="hint">SELECT AN OPTION WITH THE MOUSE // IN GAME: P = PAUSE, ESC = PAUSE</div>
+    </div>
+  </section>
+
+  <!-- HOW TO PLAY -->
+  <section id="howScreen" class="screen">
+    <div class="terminal">
+      <div class="scanlines"></div>
+      <div class="brand"><div class="sys">MISSION BRIEFING</div><h1>HOW TO PLAY</h1><p>STEALTH IS YOUR ONLY ADVANTAGE.</p></div>
+      <div class="how-grid">
+        <div class="how-card"><h3>[ MOVEMENT ]</h3><p>Use <b>W A S D</b> or the <b>Arrow Keys</b> to move around the computer lab.</p></div>
+        <div class="how-card"><h3>[ HIDE ]</h3><p>Press <b>E</b> to become hidden for <b>5 seconds</b>. Use it to break a chase and reposition.</p></div>
+        <div class="how-card"><h3>[ SABOTAGE ]</h3><p>Stand beside a computer and stay there for <b>3 seconds</b>. Each sabotage earns 1 point; a sabotaged computer resets after <b>15 seconds</b>.</p></div>
+        <div class="how-card"><h3>[ THE GUARD ]</h3><p>The guard uses a flashlight. The visible flashlight beam is the actual detection area. If the beam reaches you, the guard chases you. Breaking line-of-sight or hiding can end the chase.</p></div>
+        <div class="how-card"><h3>[ PAUSE ]</h3><p>Press <b>P</b> or <b>ESC</b>, or use the on-screen button. While paused, the mission clock and guard stop.</p></div>
+        <div class="how-card"><h3>[ RETURN ]</h3><p>During a mission, choose <b>BACK TO MENU</b> to return to this terminal without leaving the website.</p></div>
+      </div>
+      <div class="menu-list"><button class="dos-btn" onclick="startGame()"><span class="key">01</span> START MISSION</button><button class="dos-btn" onclick="backFromHowToPlay()"><span class="key">02</span> BACK TO MAIN MENU</button></div>
+    </div>
+  </section>
+
+  <!-- GAME SCREEN -->
+  <section id="gameScreen" class="screen">
+    <div class="game-head"><div class="game-title">MSDOS-COMLAB: STEALTH SABOTAGE</div><div class="game-actions"><button id="pauseBtn" class="mini-btn" onclick="togglePause()">PAUSE [P]</button><button class="mini-btn" onclick="returnToMenu()">BACK TO MENU</button><button class="mini-btn" onclick="restartGame()">RESTART</button></div></div>
+    <p class="game-sub">WASD / ARROWS: MOVE &nbsp;|&nbsp; E: HIDE &nbsp;|&nbsp; P / ESC: PAUSE</p>
+    <div id="gameWrap"><canvas id="game" width="1000" height="550"></canvas>
+<audio id="bgm" loop preload="auto"></audio><div id="pauseOverlay" class="pause-overlay"><div class="pause-box"><h2>MISSION PAUSED</h2><p>The lab is frozen. No movement, guard patrol, hiding timer, or sabotage progress advances while paused.</p><div class="pause-buttons"><button class="dos-btn" onclick="togglePause()">RESUME [P]</button><button class="dos-btn" onclick="returnToMenu()">BACK TO MENU</button></div></div></div></div>
+    <div id="status">Awaiting mission start...</div>
+    <div class="hud"><label>PLAYER: <input id="playerName" maxlength="16" value="Player"></label><span>SABOTAGES: <b id="score">0</b></span></div>
+    <div id="leaderboard" class="leaderboard"><h2>== SABOTAGE LEADERBOARD ==</h2><table><thead><tr><th>#</th><th>PLAYER</th><th>SABOTAGES</th></tr></thead><tbody id="leaderboardBody"></tbody></table></div>
+  </section>
+</div>
+
+<!-- SYSTEM INFO DIALOG -->
+<dialog id="about" class="system-dialog"><h2>SYSTEM INFO</h2><p>MSDOS-COMLAB: STEALTH SABOTAGE is an after-hours computer-lab stealth game. This menu layer provides mission launch, controls briefing, pause, restart, and return-to-menu navigation.</p><button class="dos-btn" onclick="document.getElementById('about').close()">CLOSE</button></dialog>
+<script src="js/game.js"></script>
+</body>
+</html>
